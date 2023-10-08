@@ -50,7 +50,15 @@ class JWTRepo:
 
     @staticmethod
     def decode_token(token: str):
-        return jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
+        try:
+            payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
+            return payload.get("id")
+        except jwt.ExpiredSignatureError:
+            raise HTTPException(status_code=403, detail="Token expired.")
+        except jwt.InvalidTokenError:
+            raise HTTPException(status_code=403, detail="Invalid token.")
+        except Exception as e:
+            return {}
 
     @staticmethod
     def get_token(request: Request):

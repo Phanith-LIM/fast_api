@@ -20,8 +20,7 @@ async def get_user(db: Session = Depends(get_db)):
     return ResponseSchema(code=200, status="S", result=_user).model_dump(exclude_none=True)
 
 @router.get("/user", dependencies=[Depends(JWTBearer())], summary=None, name=' ')
-async def get_user_by_id(request: Request, db: Session = Depends(get_db)):
-    _token = request.state.credentials.replace("Bearer ", "")
-    _user_id = JWTRepo.decode_token(_token).get("id")
+async def get_user_by_id(_token: str = Depends(JWTBearer()), db: Session = Depends(get_db)):
+    _user_id = JWTRepo.decode_token(_token.replace("Bearer ", ""))
     _user = UserRepo.get_by_id(db, Users, _user_id)
     return ResponseSchema(code=200, status="S", result=_user).model_dump(exclude_none=True)
