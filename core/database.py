@@ -1,7 +1,7 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, declarative_base
 
-SQLALCHEMY_DATABASE_URL = "postgresql+psycopg2://admin123:g6yGlYvFFmWeaMp6RtBVCEOzbQYTj07P@dpg-ckf39e8l3its738kding-a.singapore-postgres.render.com/mydb_a0vn"
+SQLALCHEMY_DATABASE_URL = "postgresql://postgres:IdsLfykCxIWR4fmB@db.hzjvxohsotpxltveuwfs.supabase.co:5432/postgres"
 engine = create_engine(
     SQLALCHEMY_DATABASE_URL,
 )
@@ -15,3 +15,10 @@ def get_db():
         yield db
     finally:
         db.close()
+
+
+# JWT Configuration
+
+SECRET_KEY = "NinnCode6000"
+ALGORITHM = "HS256"
+ACCESS_TOKEN_EXPIRE_MINUTES = 30
