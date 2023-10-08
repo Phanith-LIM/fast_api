@@ -8,10 +8,23 @@ from modules.auth.controller import router as auth_router
 Base.metadata.create_all(bind=engine)
 
 app = FastAPI(
-    docs_url="/",
+    docs_url="/swagger",
     title="Report Management API",
     description="Report Management API",
+    version="1.0.0",
+    redoc_url=None,
+    swagger_ui_parameters={
+        "dom_id": "#swagger-ui",
+        "layout": "BaseLayout",
+        "deepLinking": True,
+        "showExtensions": True,
+        "showCommonExtensions": True,
+    }
 )
+
+@app.get("/")
+async def root():
+    return {"message": "REPORT MANAGEMENT API"}
 
 app.add_middleware(
     CORSMiddleware,
