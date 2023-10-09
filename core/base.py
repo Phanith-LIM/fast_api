@@ -1,11 +1,11 @@
 import jwt
-from typing import TypeVar, Generic, Optional
-from sqlalchemy.orm import Session
 from sqlalchemy import UUID
+from sqlalchemy.orm import Session
 from datetime import timedelta, datetime
-from core.database import SECRET_KEY, ALGORITHM
-from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from fastapi import Request, HTTPException
+from typing import TypeVar, Generic, Optional
+from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
+from .database import SECRET_KEY, ALGORITHM
 
 T = TypeVar('T')
 

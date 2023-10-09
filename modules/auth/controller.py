@@ -1,12 +1,8 @@
 from sqlalchemy.orm import Session
 from fastapi import APIRouter, Depends
-from core.database import get_db
-from core.base import JWTRepo
-from core.schemas import TokenResponse, ResponseSchema
-from modules.users.model import UserModel, UserLogin
-from modules.users.entity import Users
-from modules.users.repository import UserRepo
 from passlib.context import CryptContext
+from core import get_db, JWTRepo, TokenResponse, ResponseSchema
+from modules.users import Users, UserRepo, UserModel, UserLogin
 
 router = APIRouter(
     prefix="/Authentications",

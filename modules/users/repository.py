@@ -1,4 +1,4 @@
-from core.base import BaseRepo
+from core import BaseRepo
 from sqlalchemy.orm import Session
 from typing import Generic, TypeVar
 

@@ -1,7 +1,7 @@
-from sqlalchemy import Column, Integer, String, DateTime, UUID
-from core.database import Base
+from sqlalchemy import Column, String, DateTime, UUID
+from core import Base
 from datetime import datetime
-from typing import Generic, TypeVar
+from typing import TypeVar
 import uuid
 
 T = TypeVar('T')
@@ -20,4 +20,5 @@ class Users(Base):
 
     create_date = Column(DateTime, default=datetime.now())
     update_date = Column(DateTime)
+
 
