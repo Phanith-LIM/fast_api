@@ -7,6 +7,7 @@ from modules.users import Users, UserRepo, UserModel, UserLogin
 router = APIRouter(
     prefix="/Authentications",
     tags=["Authentications"],
+    responses={422: {"description": "Validation Error"}},
 )
 
 @router.post('/signup', summary=None, name='POST', operation_id='signup')

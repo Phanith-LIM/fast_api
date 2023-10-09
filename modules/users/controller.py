@@ -8,6 +8,7 @@ from .repositorys import UserRepo
 router = APIRouter(
     prefix="/Users",
     tags=["Users"],
+    responses={422: {"description": "Validation Error"}},
 )
 
 @router.get("/users", dependencies=[Depends(JWTBearer())], summary=None, name='GET', operation_id='users')
