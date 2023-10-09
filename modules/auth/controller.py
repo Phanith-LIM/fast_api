@@ -16,7 +16,7 @@ router = APIRouter(
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
-@router.post('/signup', summary=None, name=' ')
+@router.post('/signup', summary=None, name='POST', operation_id='signup')
 async def signup(user: UserModel, db: Session = Depends(get_db)):
     try:
         _user = (
@@ -36,7 +36,7 @@ async def signup(user: UserModel, db: Session = Depends(get_db)):
         return ResponseSchema(code=500, status="E").model_dump(exclude_none=True)
 
 
-@router.post('/login', summary=None, name=' ')
+@router.post('/login', summary=None, name='POST', operation_id='login')
 async def login(user: UserLogin, db: Session = Depends(get_db)):
     try:
         _user = UserRepo.find_by_username(db, Users, user.username)
