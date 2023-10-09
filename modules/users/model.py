@@ -8,7 +8,6 @@ class UserModel(BaseModel):
     first_name: str
     last_name: str
 
-
 class UserLogin(BaseModel):
     username: str
     password: str

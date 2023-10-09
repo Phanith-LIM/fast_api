@@ -1,18 +1,14 @@
-from sqlalchemy.orm import Session
-from fastapi import APIRouter, Depends, Request
-from core.database import get_db, SECRET_KEY, ALGORITHM
-from modules.users.entity import Users
-from core.base import JWTBearer, JWTRepo
-from core.schemas import ResponseSchema
-from modules.users.repository import UserRepo
 import uuid
+from sqlalchemy.orm import Session
+from fastapi import APIRouter, Depends
+from core import get_db, ResponseSchema, JWTBearer, JWTRepo
+from .entity import Users
+from .repositorys import UserRepo
 
 router = APIRouter(
     prefix="/Users",
     tags=["Users"],
-    responses={422: {"description": "Validation Error"}},
 )
-
 
 @router.get("/users", dependencies=[Depends(JWTBearer())], summary=None, name='GET', operation_id='users')
 async def get_user(db: Session = Depends(get_db)):
