@@ -45,7 +45,7 @@ async def login(user: UserLogin, db: Session = Depends(get_db)):
             return ResponseSchema(code=400, status="Bad Request", message="Invalid password").model_dump(
                 exclude_none=True)
 
-        token = JWTRepo.generate_token({"sub": _user.username, "id": _user.id})
+        token = JWTRepo.generate_token({"sub": _user.username, "id": str(_user.id)})
         return ResponseSchema(
             code=200,
             status="S",

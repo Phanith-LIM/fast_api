@@ -31,9 +31,6 @@ def custom_openapi():
         version="1.0.0",
         routes=app.routes,
         openapi_version="3.1.0",
-        servers=[
-            {"url": "https://test-api-602w.onrender.com"}
-        ],
     )
     for path, path_item in openapi_schema["paths"].items():
         for method, operation in path_item.items():

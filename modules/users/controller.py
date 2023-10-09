@@ -5,6 +5,7 @@ from modules.users.entity import Users
 from core.base import JWTBearer, JWTRepo
 from core.schemas import ResponseSchema
 from modules.users.repository import UserRepo
+import uuid
 
 router = APIRouter(
     prefix="/Users",
@@ -21,5 +22,6 @@ async def get_user(db: Session = Depends(get_db)):
 @router.get("/user", dependencies=[Depends(JWTBearer())], summary=None, name='GET', operation_id='user')
 async def get_user_by_id(_token: str = Depends(JWTBearer()), db: Session = Depends(get_db)):
     _user_id = JWTRepo.decode_token(_token.replace("Bearer ", ""))
+    _user_id = uuid.UUID(_user_id)
     _user = UserRepo.get_by_id(db, Users, _user_id)
     return ResponseSchema(code=200, status="S", result=_user).model_dump(exclude_none=True)

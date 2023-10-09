@@ -1,6 +1,7 @@
 import jwt
 from typing import TypeVar, Generic, Optional
 from sqlalchemy.orm import Session
+from sqlalchemy import UUID
 from datetime import timedelta, datetime
 from core.database import SECRET_KEY, ALGORITHM
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
@@ -15,7 +16,7 @@ class BaseRepo:
         return db.query(model).all()
 
     @staticmethod
-    def get_by_id(db: Session, model: Generic[T], id: int):
+    def get_by_id(db: Session, model: Generic[T], id: UUID):
         return db.query(model).filter(model.id == id).first()
 
     @staticmethod
